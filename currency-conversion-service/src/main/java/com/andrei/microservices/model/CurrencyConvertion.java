@@ -9,7 +9,7 @@ import lombok.NoArgsConstructor;
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
-public class CurrencyConvertionBean {
+public class CurrencyConvertion {
 
 	private Long id;
 	private String from;

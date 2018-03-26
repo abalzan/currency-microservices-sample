@@ -11,25 +11,25 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.client.RestTemplate;
 
-import com.andrei.microservices.model.CurrencyConvertionBean;
+import com.andrei.microservices.model.CurrencyConvertion;
 
 @RestController
 @RequestMapping("/currency-converter")
 public class CurrencyConversionController {
 
 	@GetMapping("/from/{from}/to/{to}/quantity/{quantity}")
-	public CurrencyConvertionBean convertCurrency(@PathVariable String from, @PathVariable String to,
+	public CurrencyConvertion convertCurrency(@PathVariable String from, @PathVariable String to,
 			@PathVariable BigDecimal quantity) {
 
 		Map<String, String> uriVariables = new HashMap<>();
 		uriVariables.put("from", from);
 		uriVariables.put("to", to);
-		ResponseEntity<CurrencyConvertionBean> responseEntity = new RestTemplate().getForEntity(
+		ResponseEntity<CurrencyConvertion> responseEntity = new RestTemplate().getForEntity(
 					"http://localhost:8000/currency-exchange/from/{from}/to/{to}", 
-					CurrencyConvertionBean.class, uriVariables);
+					CurrencyConvertion.class, uriVariables);
 
-		CurrencyConvertionBean response = responseEntity.getBody();
-		return new CurrencyConvertionBean(response.getId(), from, to, 
+		CurrencyConvertion response = responseEntity.getBody();
+		return new CurrencyConvertion(response.getId(), from, to, 
 					response.getConversionMultiple(), quantity,
 					quantity.multiply(response.getConversionMultiple()),
 					response.getPort());
