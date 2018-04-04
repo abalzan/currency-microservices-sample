@@ -10,6 +10,9 @@ import org.springframework.web.bind.annotation.RestController;
 import com.andrei.microservices.model.Exchange;
 import com.andrei.microservices.repository.ExchangeRepository;
 
+import lombok.extern.slf4j.Slf4j;
+
+@Slf4j
 @RestController
 @RequestMapping("/currency-exchange")
 public class CurencyExchangeController {
@@ -26,6 +29,7 @@ public class CurencyExchangeController {
 		Exchange exchange = exchangeRepository.findByFromAndTo(from, to);
 		exchange.setPort(Integer.parseInt(environment.getProperty("local.server.port")));
 		
+		log.info(exchange.toString());
 		return exchange;
 	}
 }

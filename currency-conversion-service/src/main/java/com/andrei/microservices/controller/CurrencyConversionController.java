@@ -14,8 +14,10 @@ import org.springframework.web.client.RestTemplate;
 import com.andrei.microservices.model.CurrencyConvertion;
 import com.andrei.microservices.service.CurrencyExchangeServiceProxy;
 
+import lombok.extern.slf4j.Slf4j;
+
+@Slf4j
 @RestController
-//@RequestMapping("/currency-converter")
 public class CurrencyConversionController {
 	
 	@Autowired
@@ -36,7 +38,7 @@ public class CurrencyConversionController {
 
 		CurrencyConvertion response = responseEntity.getBody();
 		//===========================OLD CODE ====================================
-		
+		log.info("Response is -> "+response.toString());
 		return new CurrencyConvertion(response.getId(), from, to, 
 					response.getConversionMultiple(), quantity,
 					quantity.multiply(response.getConversionMultiple()),
@@ -49,6 +51,8 @@ public class CurrencyConversionController {
 			@PathVariable BigDecimal quantity) {
 
 		CurrencyConvertion response = currencyExchangeServiceProxy.retrieveExchange(from, to);
+		
+		log.info("Response is -> "+response.toString());
 		
 		return new CurrencyConvertion(response.getId(), from, to, 
 					response.getConversionMultiple(), quantity,
