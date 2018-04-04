@@ -13,11 +13,12 @@ import com.andrei.microservices.model.CurrencyConvertion;
 // you fill the url parameter, this I don't get yet, 
 // because if I have more than one microservice what is gonna happen? for this we use Ribbon :)
 //@FeignClient(name = "currency-exchange-service", url = "localhost:8000")
-@FeignClient(name = "currency-exchange-service")
+@FeignClient(name = "netflix-zuul-api-gateway-server")
 @RibbonClient(name = "currency-exchange-service")
 public interface CurrencyExchangeServiceProxy {
 
 	// Here we need to define a method to talk with currency Exchange Service
-	@GetMapping("/currency-exchange/from/{from}/to/{to}")
+//	@GetMapping("/currency-exchange/from/{from}/to/{to}")
+	@GetMapping("/currency-exchange-service/currency-exchange/from/{from}/to/{to}")
 	public CurrencyConvertion retrieveExchange(@PathVariable("from") String from, @PathVariable("to") String to);
 }
