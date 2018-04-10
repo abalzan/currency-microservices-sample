@@ -1,5 +1,6 @@
 package com.andrei.microservices.limitsservice.controller;
 
+import org.springframework.cloud.context.config.annotation.RefreshScope;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
@@ -7,6 +8,7 @@ import org.springframework.web.bind.annotation.RestController;
 import com.andrei.microservices.limitsservice.bean.LimitConfiguration;
 import com.andrei.microservices.limitsservice.config.Configuration;
 
+@RefreshScope
 @RestController
 @RequestMapping("/limits")
 public class LimitsConfigurationController {
